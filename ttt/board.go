@@ -1,6 +1,31 @@
 package ttt
 
+func newBoard()  *board {
+	var b board
+	for i:=0 ; i < len(b) ; i++  {
+		for j := 0; j < len(b[i]); j++ {
+			b[i][j] = "_"
+		}
+	}
+ 	return &b
+}
+
 type board [3][3] string
+
+func  (b *board) String() string  {
+	str := "   "
+	for i := range  b {
+		for j := range  b[i] {
+			str += b[i][j] + " "
+		}
+		str += "\n   "
+	}
+	return  str
+}
+
+func (b *board) isOver() bool {
+	return b.winner() != "" || b.emptyCount() == 0
+}
 
 func (b *board) emptyCount() int {
 	count := 0
@@ -47,7 +72,7 @@ func (b *board) winner() string {
 			return "O"
 		}
 	}
-
+	return ""
 }
 
 func (b *board) rows() [3][3]string {
@@ -55,13 +80,13 @@ func (b *board) rows() [3][3]string {
 }
 
 func (b *board) coluns() [3][3]string {
-	colums := [3][3]string{}
+	columns := [3][3]string{}
 	for i := range b {
 		for j := range b[i] {
-			colums[j][i] = b[i][j]
+			columns[j][i] = b[i][j]
 		}
 	}
-	return colums
+	return columns
 }
 
 
