@@ -23,10 +23,6 @@ func  (b *board) String() string  {
 	return  str
 }
 
-func (b *board) isOver() bool {
-	return b.winner() != "" || b.emptyCount() == 0
-}
-
 func (b *board) emptyCount() int {
 	count := 0
 	for i := range b {
